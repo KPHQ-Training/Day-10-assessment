@@ -893,7 +893,7 @@
 
     <div class="card card-accent" style="margin-top:18px">
       <div class="card-head"><svg><use href="#i-check"/></svg> All sections complete</div>
-      <p style="margin:0">Click <strong>Next</strong> to submit your assessment and see your results.</p>
+      <p style="margin:0">Click <strong>Next</strong> to go to the results page, then click <strong>Submit</strong> to finalize your assessment.</p>
     </div>
   </div></section>
 
@@ -936,7 +936,7 @@
   <div class="deckbar">
     <button class="nav-btn" id="prevBtn" onclick="prev()"><svg><use href="#i-arrow-l"/></svg> Prev</button>
     <div class="db-label" id="dbLabel">Overview</div>
-    <div class="db-count" id="dbCount"><strong>1</strong> / 12</div>
+    <div class="db-count" id="dbCount"><strong>1</strong> / 14</div>
     <button class="nav-btn nav-next" id="nextBtn" onclick="next()">Next <svg><use href="#i-arrow"/></svg></button>
   </div>
 </div>
@@ -958,7 +958,7 @@ function kpSetName(n){n=(n||'').trim();if(!n)return false;attendeeName=n;localSt
 function kpRecordPresence(){if(TRACK.BEACON_ON_OPEN&&kpOnce('kp_open_'+TRACK.DAY+'_'+new Date().toDateString()))kpTrack('opened',{});if(kpOnce('kp_att_'+TRACK.DAY))kpTrack('attendance',{firstName:localStorage.getItem('kp_fname')||'',lastName:localStorage.getItem('kp_lname')||''});var f=document.getElementById('attForm'),d=document.getElementById('attDone');if(f)f.style.display='none';if(d)d.style.display='block';}
 
 function kpGateClose(){var g=document.getElementById('kpGate');if(g&&g.parentNode)g.parentNode.removeChild(g);}
-function kpGateOpen(){if(document.getElementById('kpGate'))return;var g=document.createElement('div');g.id='kpGate';g.style.cssText='position:fixed;inset:0;z-index:99999;background:rgba(4,10,7,.93);display:flex;align-items:center;justify-content:center;padding:24px;font-family:Inter,system-ui,sans-serif';g.innerHTML='<div style="max-width:420px;width:100%;background:#0c1410;border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:30px;box-shadow:0 20px 60px rgba(0,0,0,.5)"><div style="font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:#EAB308;font-weight:700;margin-bottom:10px">'+TRACK.DAY+' &mdash; Final Assessment</div><h2 style="margin:0 0 8px;font-size:23px;color:#fff;font-weight:700">Enter your name to begin</h2><p style="margin:0 0 18px;font-size:14px;line-height:1.5;color:#9fb0a4">Your name will appear on your certificate if you pass.</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><input id="kpGateFname" placeholder="First name" autocomplete="given-name" style="width:100%;box-sizing:border-box;padding:13px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:#08100c;color:#fff;font-size:15px;outline:none"><input id="kpGateLname" placeholder="Last name" autocomplete="family-name" style="width:100%;box-sizing:border-box;padding:13px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:#08100c;color:#fff;font-size:15px;outline:none"></div><div id="kpGateErr" style="display:none;color:#F87171;font-size:13px;margin-top:10px"></div><button id="kpGateBtn" style="width:100%;margin-top:16px;padding:13px;border:none;border-radius:10px;background:#EAB308;color:#1A1300;font-weight:700;font-size:15px;cursor:pointer">Start Assessment</button></div>';document.body.appendChild(g);var fn=g.querySelector('#kpGateFname'),ln=g.querySelector('#kpGateLname'),btn=g.querySelector('#kpGateBtn'),er=g.querySelector('#kpGateErr');function go(){var f=(fn.value||'').trim(),l=(ln.value||'').trim();if(!f||!l){er.textContent='Please enter both your first and last name.';er.style.display='block';(f?ln:fn).focus();return;}er.style.display='none';localStorage.setItem('kp_fname',f);localStorage.setItem('kp_lname',l);kpSetName(f+' '+l);localStorage.setItem('kp_gate_'+CONFIG.DAY,'1');kpGateClose();kpRecordPresence();}btn.onclick=go;[fn,ln].forEach(function(i){i.addEventListener('keydown',function(e){if(e.key==='Enter')go();});});setTimeout(function(){try{fn.focus();}catch(e){}},50);}
+function kpGateOpen(){if(document.getElementById('kpGate'))return;var g=document.createElement('div');g.id='kpGate';g.style.cssText='position:fixed;inset:0;z-index:99999;background:rgba(4,10,7,.93);display:flex;align-items:center;justify-content:center;padding:24px;font-family:Inter,system-ui,sans-serif';g.innerHTML='<div style="max-width:420px;width:100%;background:#0c1410;border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:30px;box-shadow:0 20px 60px rgba(0,0,0,.5)"><div style="font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:#22C55E;font-weight:700;margin-bottom:10px">DAY 10 CHECK-IN</div><h2 style="margin:0 0 8px;font-size:23px;color:#fff;font-weight:700">Enter your name to begin</h2><p style="margin:0 0 18px;font-size:14px;line-height:1.5;color:#9fb0a4">This checks you in for today. One per person.</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><input id="kpGateFname" placeholder="First name" autocomplete="given-name" style="width:100%;box-sizing:border-box;padding:13px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:#08100c;color:#fff;font-size:15px;outline:none"><input id="kpGateLname" placeholder="Last name" autocomplete="family-name" style="width:100%;box-sizing:border-box;padding:13px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:#08100c;color:#fff;font-size:15px;outline:none"></div><div id="kpGateErr" style="display:none;color:#F87171;font-size:13px;margin-top:10px"></div><button id="kpGateBtn" style="width:100%;margin-top:16px;padding:13px;border:none;border-radius:10px;background:#22C55E;color:#052010;font-weight:700;font-size:15px;cursor:pointer">Mark me present &amp; start</button></div>';document.body.appendChild(g);var fn=g.querySelector('#kpGateFname'),ln=g.querySelector('#kpGateLname'),btn=g.querySelector('#kpGateBtn'),er=g.querySelector('#kpGateErr');function go(){var f=(fn.value||'').trim(),l=(ln.value||'').trim();if(!f||!l){er.textContent='Please enter both your first and last name.';er.style.display='block';(f?ln:fn).focus();return;}er.style.display='none';localStorage.setItem('kp_fname',f);localStorage.setItem('kp_lname',l);kpSetName(f+' '+l);localStorage.setItem('kp_gate_'+CONFIG.DAY,'1');kpGateClose();kpRecordPresence();}btn.onclick=go;[fn,ln].forEach(function(i){i.addEventListener('keydown',function(e){if(e.key==='Enter')go();});});setTimeout(function(){try{fn.focus();}catch(e){}},50);}
 
 function kpShowLocked(badge,heading,body){if(document.getElementById('kpLocked'))return;var el=document.createElement('div');el.id='kpLocked';el.style.cssText='position:fixed;inset:0;z-index:99999;background:rgba(4,10,7,.96);display:flex;align-items:center;justify-content:center;padding:24px;font-family:Inter,system-ui,sans-serif';el.innerHTML='<div style="max-width:420px;width:100%;background:#0c1410;border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:32px;box-shadow:0 20px 60px rgba(0,0,0,.5);text-align:center"><div style="font-size:42px;margin-bottom:14px">&#x1F512;</div><div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#F59E0B;font-weight:700;margin-bottom:10px">'+badge+'</div><h2 style="margin:0 0 12px;font-size:22px;color:#fff;font-weight:700;line-height:1.3">'+heading+'</h2><p style="margin:0;font-size:14px;line-height:1.6;color:#9fb0a4">'+body+'</p></div>';document.body.appendChild(el);}
 function kpShowAdminBadge(){function _b(){if(document.getElementById('kpAdminBadge'))return;var wrap=document.createElement('div');wrap.id='kpAdminBadge';wrap.style.cssText='position:fixed;top:12px;right:12px;z-index:99999;display:flex;flex-direction:column;align-items:flex-end;gap:6px;font-family:Inter,system-ui,sans-serif';wrap.innerHTML='<div style="background:#F59E0B;color:#000;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.3)">ADMIN</div><button onclick="adminResetAll()" style="background:#0c1410;border:1.5px solid #F59E0B;color:#F59E0B;font-size:11px;font-weight:700;padding:6px 14px;border-radius:6px;cursor:pointer;letter-spacing:.04em;box-shadow:0 2px 8px rgba(0,0,0,.4);font-family:Inter,system-ui,sans-serif">&#8635; Reset All</button>';document.body.appendChild(wrap);}document.readyState==='loading'?document.addEventListener('DOMContentLoaded',_b):_b();}
@@ -1072,7 +1072,7 @@ function showResults(){
   const pass=s.pct>=PASS_PCT;
 
   document.getElementById('scorePct').textContent=s.pct+'%';
-  document.getElementById('scoreDetail').textContent=s.total+' / '+TOTAL+' correct'+(pass?' â€” PASSED':' â€” Below passing score');
+  document.getElementById('scoreDetail').textContent=s.total+' / '+TOTAL+' correct'+(pass?' — PASSED':' — Below passing score');
   const box=document.getElementById('scoreBox');
   box.classList.toggle('pass',pass);
   box.classList.toggle('fail',!pass);
@@ -1118,7 +1118,7 @@ function showResults(){
         const item=items.find(it=>it.dataset.idx===idx);
         return item?item.textContent.trim():'?';
       });
-      fb.innerHTML='<span class="no">Incorrect.</span> Correct order: <strong>'+correctNames.join(' â†’ ')+'</strong>';
+      fb.innerHTML=’<span class="no">Incorrect.</span> Correct order: <strong>’+correctNames.join(‘ &rarr; ‘)+’</strong>’;
       fb.classList.add('show');
     }else{
       fb.innerHTML='<span class="ok">Correct!</span>';
@@ -1130,7 +1130,7 @@ function showResults(){
   const retakeArea=document.getElementById('retakeArea');
 
   if(pass){
-    certArea.innerHTML='<div class="card card-accent"><div class="card-head"><svg><use href="#i-check"/></svg> Assessment passed</div><p style="margin:0">You scored <strong>'+s.pct+'% ('+s.total+'/'+TOTAL+')</strong> â€” above the 80% passing threshold. Your result has been recorded. Your instructor will confirm attendance and issue your certificate separately.</p></div>';
+    certArea.innerHTML='<div class=”card card-accent”><div class=”card-head”><svg><use href=”#i-check”/></svg> Assessment passed</div><p style=”margin:0”>You scored <strong>'+s.pct+'% ('+s.total+'/'+TOTAL+')</strong> &mdash; above the 80% passing threshold. Your result has been recorded. Your instructor will confirm attendance and issue your certificate separately.</p></div>';
     kpTrack('assessment_passed',{score:s.pct,mcq:s.mcq,sit:s.sit,seq:s.seq});
     localStorage.setItem('kp_done_Day 10','1');
   }else{
